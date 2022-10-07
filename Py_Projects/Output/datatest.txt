@@ -1,0 +1,4 @@
+save the text to output
+1. A
+2. B
+3.C

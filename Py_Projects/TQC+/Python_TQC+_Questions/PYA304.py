@@ -1,0 +1,1 @@
+# TODOnumSum = 0a = eval(input())for num in range(1,a+1):    if num % 5 == 0:        numSum += numprint(numSum)

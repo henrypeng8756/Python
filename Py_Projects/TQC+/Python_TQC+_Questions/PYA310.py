@@ -1,0 +1,1 @@
+# TODOsumList = 0 n = eval(input())for num in range(2,n+1):    sumList += (1/((num-1)**0.5+(num)**0.5))print('%.4f' %(sumList))

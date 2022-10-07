@@ -1,0 +1,1 @@
+# TODOa = eval(input())b = eval(input())opt = input()if opt == '+':    print(f'{a+b}')elif opt == '-':    print(f'{a-b}')elif opt == '*':    print(f'{a*b}')elif opt == '/':    print(f'{a/b}')elif opt == '//':    print(f'{a//b}')else:    print(f'{a%b}')

@@ -2670,10 +2670,10 @@ import matplotlib.pyplot as plt
 boston = datasets.load_boston()
 x = pd.DataFrame(boston.data, columns=boston.feature_names)
 target = pd.DataFrame(boston.target, columns=['MEDV'])
-xTrain, xTest, yTrain, yTest = tts(x,y,test_size=0.33, random_state=5)
+XTrain, XTest, yTrain, yTest = tts(x,y,test_size=0.33, random_state=5)
 lm = LinearRegression()
-lm.fit(xTrain,yTrain)
-pred_test = lm.predict(xTest)
+lm.fit(XTrain,yTrain)
+pred_test = lm.predict(XTest)
 plt.scatter(yTest, pred_test)
 plt.xlabel('Price')
 plt.ylabel('Predicted Price')
@@ -2710,17 +2710,17 @@ boston = datasets.load_boston()
 x = pd.DataFrame(boston.data, columns=boston.feature_names)
 target = pd.DataFrame(boston.target, columns=['MEDV'])
 y = target['MEDV']
-xTrain, xTest, yTrain, yTest = tts(x,y,test_size=0.33, random_state=5)
+XTrain, XTest, yTrain, yTest = tts(x,y,test_size=0.33, random_state=5)
 lm = LinearRegression()
-lm.fit(xTrain, yTrain)
-pred_train = lm.predict(xTrain)
-pred_test = lm.predict(xTest)
+lm.fit(XTrain, yTrain)
+pred_train = lm.predict(XTrain)
+pred_test = lm.predict(XTest)
 MSE_train = np.mean((yTrain-pred_train)**2)
 MSE_test = np.mean((yTest-pred_test)**2)
 print('訓練資料的MSE: ', MSE_train)
 print('測試資料的MSE: ', MSE_test)
-print('訓練資料的R-Square: ', lm.score(xTrain, yTrain))
-print('測試資料的R-Square: ', lm.score(xTest, yTest))
+print('訓練資料的R-Square: ', lm.score(XTrain, yTrain))
+print('測試資料的R-Square: ', lm.score(XTest, yTest))
 
 
 # %%
@@ -2735,12 +2735,12 @@ x = pd.DataFrame(boston.data, columns=boston.feature_names)
 target = pd.DataFrame(boston.target, columns=['MEDV'])
 y = target['MEDV']
 
-xTrain, xTest, yTrain, yTest = tts(x,y,test_size=0.33, random_state=5)
+XTrain, XTest, yTrain, yTest = tts(x,y,test_size=0.33, random_state=5)
 lm = LinearRegression()
-lm.fit(xTrain, yTrain)
+lm.fit(XTrain, yTrain)
 
-pred_train = lm.predict(xTrain)
-pred_test = lm.predict(xTest)
+pred_train = lm.predict(XTrain)
+pred_test = lm.predict(XTest)
 
 plt.scatter(pred_train,yTrain-pred_train, c='b', s=40, alpha=0.5, label='Training Data')
 plt.scatter(pred_test, yTest-pred_test, c='r', s=40, label='Test Data')
@@ -2797,10 +2797,168 @@ p.y_range.start = 0
 show(p)
 
 # %%
-import bokeh.plotting import figure, show 
+from bokeh.plotting import figure, show 
 import numpy as np
+x = np.arange(10)
+y = np.random.randint(1,11,10)
+p = figure()
+p.vbar(x, top=y, width=0.5, bottom=0, color='#499312')
+show(p)
 
-x = np.arrange(10)
+#%%
+from bokeh.plotting import figure, show
+import numpy as np
+x = np.arange(10)
 y = np.random.randint(1,10,10)
 p = figure()
-p.circle(x,y,size=15, colot )
+p.circle(x,y,size=15,color='#ED8B21')
+show(p)
+
+# %%
+from bokeh.plotting import figure,show
+x = 0
+y = 0 
+radius = 1 
+start_angle= [0,1.8,2.5,3.7,5.6]
+end_angle= [1.8,2.5,3.7,5.6,0]
+color = ['violet','blue','green','yellow','red']
+p = figure()
+p.wedge(x,y,radius,start_angle,end_angle,color=color)
+show(p)
+
+# %%
+from bokeh.plotting import figure, show, save, output_file
+import numpy as np
+
+x = np.arange(10)
+y = np.random.randint(1,10,10)
+p = figure()
+p.circle(x,y,size=15,color='#00FF00')
+output_file('output.html')
+save(p)
+show(p)
+
+
+# %%
+import pandas as pd
+import numpy as np
+from sklearn import preprocessing, linear_model
+titanic = pd.read_csv('Samples/titanic.csv')
+print('原始資料')
+titanic.info()
+age_median = np.nanmedian(titanic['Age'])
+print()
+print('年齡中位數', age_median)
+print()
+new_age = np.where(titanic['Age'].isnull(), age_median, titanic['Age'])
+titanic['Age'] = new_age
+print('更新後資料')
+titanic.info()
+label_encoder = preprocessing.LabelEncoder()
+encoded_class = label_encoder.fit_transform(titanic['PClass'])
+x = pd.DataFrame([encoded_class, titanic['SexCode'], titanic['Age']]).T
+y = titanic['Survived']
+logistic = linear_model.LogisticRegression()
+logistic.fit(x,y)
+print('迴歸係數: ',logistic.coef_)
+print('截距: ',logistic.intercept_)
+# confusion matrix
+print('混淆矩陣')
+preds = logistic.predict(x)
+print(pd.crosstab(titanic['Survived'], preds))
+print((805+265)/(805+58+185+265))
+print(logistic.score(x,y))
+
+# %%
+import pandas as pd
+import numpy as np
+from sklearn import preprocessing, linear_model
+titanic = pd.read_csv('Samples/titanic.csv')
+print('原始資料')
+titanic.info()
+age_median = np.nanmedian(titanic['Age'])
+print()
+print('年齡中位數', age_median)
+print()
+new_age = np.where(titanic['Age'].isnull(), age_median, titanic['Age'])
+titanic['Age'] = new_age
+print('更新後資料')
+titanic.info()
+label_encoder = preprocessing.LabelEncoder()
+encoded_class = label_encoder.fit_transform(titanic['PClass'])
+x = pd.DataFrame([encoded_class, titanic['SexCode']]).T
+y = titanic['Survived']
+logistic = linear_model.LogisticRegression()
+logistic.fit(x,y)
+print('迴歸係數: ',logistic.coef_)
+print('截距: ',logistic.intercept_)
+# confusion matrix
+print('混淆矩陣')
+preds = logistic.predict(x)
+print(pd.crosstab(titanic['Survived'], preds))
+print((840+228)/(840+23+222+228))
+print(logistic.score(x,y))
+
+# %%
+from sklearn import datasets
+iris = datasets.load_iris()
+print(iris.keys())
+print(iris.data.shape)
+print(iris.feature_names)
+print(iris.DESCR)
+
+# %%
+import pandas as pd
+from sklearn import datasets
+from sklearn import tree
+from sklearn.model_selection import train_test_split as tts
+iris = datasets.load_iris()
+x = pd.DataFrame(iris.data, columns=iris.feature_names)
+print(iris.target_names)
+target = pd.DataFrame(iris.target, columns=['target'])
+y = target['target']
+XTrain, XTest, yTrain, yTest = tts(x,y,test_size=0.33, random_state=1)
+dtree = tree.DecisionTreeClassifier(max_depth = 3)
+a = dtree.fit(XTrain, yTrain)
+
+# %%
+import pandas as pd
+import numpy as np
+from sklearn import neighbors
+X = pd.DataFrame({
+      'Durabillity':[7,7,3,1],
+      'Strength': [7,4,4,4]
+})
+y = np.array([0,0,1,1])
+k = 3
+knn = neighbors.KNeighborsClassifier(n_neighbors=k)
+knn.fit(X,y)
+
+new_tissue = pd.DataFrame(np.array([[3,7]]))
+pred = knn.predict(new_tissue)
+print(pred)
+
+# %%
+import pandas as pd
+import numpy as np
+from sklearn import datasets
+import matplotlib.pyplot as plt
+iris = datasets.load_iris()
+X = pd.DataFrame(iris.data, columns= iris.feature_names)
+X.columns = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width']
+target = pd.DataFrame(iris.target, columns=['target'])
+y = target['target']
+colmap = np.array(['r','g','y'])
+plt.figure(figsize=(10,5))
+plt.subplot(1,2,1)
+plt.subplots_adjust(hspace=.5)
+plt.scatter(X['sepal_length'],X['sepal_width'],color=colmap[y])
+plt.xlabel('Sepal Length')
+plt.ylabel('Sepal Width')
+plt.subplot(1,2,2)
+plt.scatter(X['petal_length'],X['petal_width'],color=colmap[y])
+plt.xlabel('Petal Length')
+plt.ylabel('Petal Width')
+plt.show()
+
+# %%

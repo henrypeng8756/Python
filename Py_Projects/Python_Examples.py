@@ -3165,12 +3165,36 @@ win.mainloop()
 # %%
 from tkinter import *
 win = Tk()
+win.title('Showing Windows & Mac Menu with submenu')
 win.geometry('300x200')
 menu = Menu(win)
 submenu = Menu(menu)
 submenu.add_command(label='Open...')
 submenu.add_command(label='Save')
-submenu.add_command(label='')
+submenu.add_command(label='Save As...')
+menu.add_cascade(label='File', menu=submenu)
+win.config(menu=menu)
+win.mainloop()
 
+# %%
+from tkinter import *
+win = Tk()
+win.title('Showing Menu naming best practice both Mac & Win')
+menu = Menu(win)
+filemenu = Menu(menu)
+filemenu.add_command(label="New")
+filemenu.add_command(label="Open")
+filemenu.add_command(label="Save")
+filemenu.add_separator()
+filemenu.add_command(label="Exit", command=win.quit)
+menu.add_cascade(label="File", menu=filemenu)
+
+helpmenu = Menu(menu, tearoff=0)
+helpmenu.add_command(label="Help Index")
+helpmenu.add_command(label="About...")
+menu.add_cascade(label="Help", menu=helpmenu)
+
+win.config(menu=menu)
+win.mainloop()
 
 # %%

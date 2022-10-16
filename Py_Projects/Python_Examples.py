@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Spyder Editor
-
-This is a temporary script file.
+This file contains all the python coding examples from different catagories
 """
 # %%
 
@@ -16,11 +14,7 @@ from tkinter.tix import InputOnly
 from turtle import left
 from urllib import response
 from xml.dom import registerDOMImplementation
-
 from mysqlx import SqlResult
-
-from symbol import import_from
-
 
 print(1)
 print(1+2)
@@ -2960,5 +2954,223 @@ plt.scatter(X['petal_length'],X['petal_width'],color=colmap[y])
 plt.xlabel('Petal Length')
 plt.ylabel('Petal Width')
 plt.show()
+
+# %%
+import tkinter as tk
+window = tk.Tk()
+window.mainloop()
+
+# %%
+from tkinter import *
+window = Tk()
+window.mainloop()
+
+# %%
+from tkinter import *
+from PIL import Image
+win = Tk()
+win.title('🤙 Showing Icon in Windows')
+win.geometry('512x512')
+icon = Image.open('Output/Twitter-logo.svg.png')
+icon.save('Output/twitterlogo.ico')
+win.iconbitmap('Output/twitterlogo.ico')
+win.mainloop()
+
+# %%
+from platform import system
+print(system())   
+
+# %%
+from tkinter import *
+from Cocoa import NSApplication, NSImage 
+# pip3 install pyobjc-framework-Cocoa
+win = Tk()
+win.title('🔭 Showing Icon on MacOS title and Dock')
+win.geometry('400x300')
+ns_application = NSApplication.sharedApplication()
+logo_ns_image = NSImage.alloc().initByReferencingFile_('Output/twitterlogo.ico')
+win.iconbitmap(ns_application.setApplicationIconImage_(logo_ns_image))
+win.mainloop()
+
+# %%
+from tkinter import *
+win = Tk()
+win.title('Showing Frame')
+win.geometry('400x300')
+for color in ['red','orange','#0066FF']:
+      Frame(bg=color, height=50, width=150).pack()
+win.mainloop()
+
+# %%
+from tkinter import *
+win = Tk()
+win.title('Showing Labels')
+win.geometry('200x200')
+label1 = Label(win, text= 'Hello')
+label2 = Label(win, text= 'Nice Weather Ay~', font=50, fg='#146E68')
+label1.pack()
+label2.pack()
+win.mainloop()
+
+# %%
+from tkinter import *
+win = Tk()
+win.title('Showing Buttons')
+win.geometry('200x200')
+btn1 = Button(win, text='Button 1')
+btn2 = Button(win, text='Button 2', activeforeground='red')
+btn1.pack()
+btn2.pack()
+win.mainloop()
+
+# %%
+from tkinter import * 
+win = Tk()
+win.title('First GUI Program')
+win.geometry('200x200')
+num = 0
+word = StringVar()
+word.set(num)
+def add():
+      global num
+      num += 1
+      word.set(num)
+label1 = Label(win, textvariable=word, font= 30)
+btn = Button(win, text= 'Press Me!', activeforeground= 'red', command=add)     
+label1.pack()
+btn.pack()
+win.mainloop()
+
+# %%
+from tkinter import *
+win = Tk()
+win.title('Addition Calculator')
+#win.geometry('200x200')
+def add():
+      result.set(num1.get() + num2.get())
+num1 = DoubleVar()
+num2 = DoubleVar()
+result = DoubleVar()
+Entry(win, width= 10, textvariable= num1).pack(side= LEFT)
+Label(win, width= 10, text='+').pack(side= LEFT)
+Entry(win, width= 10, textvariable= num2,).pack(side= LEFT)
+Label(win, width= 10, text='=').pack(side= LEFT)
+Entry(win, width= 10, textvariable=result).pack(side= LEFT)
+Button(win, text='Calculate', activeforeground= 'red', command= add).pack()
+win.mainloop()    
+
+# %%
+from tkinter import *
+win = Tk()
+win.title('Showing Text = Type Area')
+win.geometry('200x200')
+text = Text(win, bg= '#CCFFCC', fg= '#0000FF', font= 30)
+text.pack() 
+win.mainloop()
+
+# %%
+from tkinter import *
+win = Tk()
+win.title('Type Area 2 Label')
+#win.geometry('200x225')
+word= StringVar()
+word.set('')
+label = Label(win, textvariable=word)
+label.pack()
+text = Text(win, height=10)
+text.pack()
+def show():
+      word.set(text.get('1.0','end-1c'))
+def clear():      
+      word.set('')
+      text.delete('1.0','end')
+btn1 = Button(win, text='Show to Label', command=show, activeforeground='red').pack()
+btn2 = Button(win, text='Clear Label', command=clear, activeforeground='red').pack()      
+win.mainloop()
+
+# %%
+from tkinter import *
+win = Tk()
+win.title('Choosing with Radiobutton')
+win.geometry('280x70')
+def show():
+      select = word.get()
+      label.config(text='I love ' + select + '.')
+word = StringVar()
+radio1 = Radiobutton(win, text='Java', variable=word, value='coding in Java', command=show)
+radio1.select()
+radio2 = Radiobutton(win, text='Python', variable=word, value='coding in Python', command=show)
+label = Label(win)
+radio1.pack()
+radio2.pack()
+label.pack()
+win.mainloop()
+
+# %%
+from tkinter import *
+win = Tk()
+win.title('Choosing with CheckButton')
+win.geometry('280x100')
+def show():
+      text = 'Your Order: ' + var1.get()+ ' ' + var2.get()+ ' ' + var3.get()+ ' '
+      word.set(text)
+word = StringVar()
+word.set('')
+var1 = StringVar()
+check1 = Checkbutton(win, text='Big Mac', variable=var1, onvalue='Big Mac', offvalue='', command=show)
+check1.pack()
+var2 = StringVar()
+check2 = Checkbutton(win, text='Mc\'o Fish ', variable=var2, onvalue='Mc\'o Fish', offvalue='', command=show)
+check2.pack()
+var3 = StringVar()
+check3 = Checkbutton(win, text='Mc Chicken', variable=var3, onvalue='Mc Chicken', offvalue='', command=show)
+check3.pack()
+Label(win,textvariable=word, font=30).pack()
+win.mainloop()
+
+# %%
+from tkinter import *
+win = Tk()
+win.title('Showing Canvas')
+win.geometry('300x200')
+canvas = Canvas(win, width= 100, height=100, bg='#FFCCCC')
+canvas.pack()
+win.mainloop()
+
+# %%
+from tkinter import * 
+win = Tk()
+win.title('Showing Canvas as Drawing Area')
+canvas = Canvas(win, width=400, height=300)
+canvas.pack()
+def paint(event):
+      x1,x2 = (event.x -1),(event.y -1)   
+      y1,y2 = (event.x +1),(event.y +1)
+      canvas.create_oval(x1,x2,y1,y2, outline='red')
+canvas.bind('<B1-Motion>', paint)
+win.mainloop()
+
+# %%
+from tkinter import *
+win = Tk()
+win.title('Showing Windows Menu')
+win.geometry('300x200')
+menu = Menu(win)
+menu.add_command(label='File')
+menu.add_command(label='Edit')
+menu.add_command(label='Tool')
+win.config(menu=menu)
+win.mainloop()
+
+# %%
+from tkinter import *
+win = Tk()
+win.geometry('300x200')
+menu = Menu(win)
+submenu = Menu(menu)
+submenu.add_command(label='Open...')
+submenu.add_command(label='Save')
+submenu.add_command(label='')
+
 
 # %%

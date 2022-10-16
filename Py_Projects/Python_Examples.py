@@ -3188,12 +3188,10 @@ filemenu.add_command(label="Save")
 filemenu.add_separator()
 filemenu.add_command(label="Exit", command=win.quit)
 menu.add_cascade(label="File", menu=filemenu)
-
 helpmenu = Menu(menu, tearoff=0)
 helpmenu.add_command(label="Help Index")
 helpmenu.add_command(label="About...")
 menu.add_cascade(label="Help", menu=helpmenu)
-
 win.config(menu=menu)
 win.mainloop()
 

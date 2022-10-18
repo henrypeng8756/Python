@@ -1,0 +1,75 @@
+import numpy as np
+import pandas as pd
+from sklearn.cluster import DBSCAN
+from sklearn.metrics import silhouette_score as ss
+# TODO
+
+# input_file =open('data_perf.txt','r')
+dat=pd.read_table('data_perf.txt',header=None,sep=',')
+
+
+# Load data 載入資料
+# TODO
+
+# Find the best epsilon 
+eps_grid = np.linspace(0.3,1.2,num=10)
+silhouette_scores = []
+# TODO
+eps_best=eps_grid[0]
+print(eps_best)
+silhouette_score_max=-1
+labels_best=None
+for eps in eps_grid
+    # Train DBSCAN clustering model 訓練DBSCAN分群模型
+    model=DBSCAN(eps=eps,min_samples=5).fit(dat)
+    # ################
+    # min_samples = 5
+    # ################
+    
+
+    # Extract labels 提取標籤
+    labels=model.labels_
+
+    # Extract performance metric 提取性能指標
+    silhouette_score=round(ss(dat,labels),4)
+    silhouette_scores.append(silhouette_score)
+    
+        
+
+    print(Epsilon, eps,  -- silhouette score, silhouette_score)
+    
+    if silhouette_score silhouette_score_max
+        silhouette_score_max=silhouette_score
+        eps_best=eps
+        model_best=model
+        labels_best=labels
+    # TODO
+    
+    
+
+# Best params
+print(Best epsilon =,eps_best)
+
+# Associated model and labels for best epsilon
+model =model_best   # TODO
+labels =labels_best  # TODO
+
+# Check for unassigned datapoints in the labels
+# TODO
+offset=0
+if -1 in labels
+    offset=1
+
+# Number of clusters in the data 
+num_clusters=len(set(labels))-offset
+# TODO
+print(Estimated number of clusters =,num_clusters)
+
+# Extracts the core samples from the trained model
+# TODO
+
+#題目答案 
+# 0.79999
+# 0.6366
+# 5個
+# 0.6401

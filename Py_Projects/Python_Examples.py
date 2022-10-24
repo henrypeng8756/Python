@@ -3428,6 +3428,12 @@ win.config(menu=menu)
 win.mainloop()
 
 # %%
+from tkinter import *
+from tkinter import messagebox
+
+win = Tk()
+win.geometry
+# %%
 import pandas as pd
 import numpy as np
 from sklearn import cluster

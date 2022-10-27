@@ -3238,10 +3238,10 @@ from tkinter import *
 win = Tk()
 win.title('Showing Labels')
 win.geometry('200x200')
-label1 = Label(win, text= 'Hello')
-label2 = Label(win, text= 'Nice Weather Ay~', font=50, fg='#146E68')
-label1.pack()
-label2.pack()
+Label1 = Label(win, text= 'Hello')
+Label2 = Label(win, text= 'Nice Weather Ay~', font=50, fg='#146E68')
+Label1.pack()
+Label2.pack()
 win.mainloop()
 
 # %%
@@ -3267,9 +3267,9 @@ def add():
       global num
       num += 1
       word.set(num)
-label1 = Label(win, textvariable=word, font= 30)
+Label1 = Label(win, textvariable=word, font= 30)
 btn = Button(win, text= 'Press Me!', activeforeground= 'red', command=add)     
-label1.pack()
+Label1.pack()
 btn.pack()
 win.mainloop()
 
@@ -3430,9 +3430,117 @@ win.mainloop()
 # %%
 from tkinter import *
 from tkinter import messagebox
-
 win = Tk()
-win.geometry
+win.geometry('200x200')
+def showinfo():
+      messagebox.showinfo('showinfo messagebox Title','Information')
+btn_showinfo = Button(win, text= 'showinfo', command= showinfo)
+btn_showinfo.pack()
+def showwarning():
+      messagebox.showwarning('showwarning messagebox Title', 'Warning' )
+btn_showwarning = Button(win, text= 'showwarning', command= showwarning)
+btn_showwarning.pack()
+def showerror():
+      messagebox.showerror('showerror messagebox Title', 'Error')
+btn_showerror = Button(win, text='showerror messagebox', command= showerror)
+btn_showerror.pack()
+def askquestion():
+      messagebox.askquestion('askquestion message Title', 'Question')
+btn_askquestion = Button(win, text='askquestion message', command= askquestion)
+btn_askquestion.pack()
+def askyesno():
+      messagebox.askyesno('askyesno messagebox Title', 'Yes/No Question')
+btn_askyesno = Button(win, text='askyesno messagebox', command= askyesno)
+btn_askyesno.pack()
+def askokcancel():
+      messagebox.askokcancel('askokcancel messagebox Title', 'Ok/Cancel Question')
+btn_askokcancel= Button(win, text='askokcancel messagebox', command= askokcancel)
+btn_askokcancel.pack()
+def askretrycancel():
+      messagebox.askretrycancel('askretrycancel messagebox Title', 'Retry/Cancel Question')
+btn_askretrycancel = Button(win, text= 'askretrycancel messagebox', command= askretrycancel)
+btn_askretrycancel.pack()
+win.mainloop()
+
+# %%
+from tkinter import *
+win = Tk()
+win.geometry('200x200')
+scrollbar = Scrollbar(win)
+scrollbar.pack(side='right', fill='y')
+win.mainloop()
+
+# %%
+from tkinter import *
+win = Tk()
+win.geometry('200x200') 
+frame = Frame(win, width=15)
+frame.pack()
+scrollbar = Scrollbar(frame)
+scrollbar.pack(side='right', fill='y')
+word = StringVar()
+word.set(('Big Mac', 'Filet-O-Fish', 'McChicken', 'McNuggets', 'Crispy Chicken', 'McCrispy', 'ChesseBurger'))
+listbox = Listbox(frame, listvariable= word, height= 5, width= 15, yscrollcommand=scrollbar.set)
+listbox.pack(side='left', fill='y')
+scrollbar.config(command=listbox.yview)
+win.mainloop()
+
+# %%
+from tkinter import *
+win = Tk()
+Label1 = Label(win, text='Label1', width= 20, height=10, bg='#FF0000')
+Label1.pack(side= RIGHT)
+Label2 = Label(win, text='Label2', width= 20, height=10, bg='#00FF00')
+Label2.pack(side= BOTTOM)
+Label3 = Label(win, text='Label3', width= 20, height=10, bg='#0000FF')
+Label3.pack(side= LEFT)
+win.mainloop()
+
+# %%
+from tkinter import *
+win = Tk()
+Label1 = Label(win, text='Label1', width=20, height=10, bg='#FF0000')
+Label1.grid(row=0, column=0)
+Label2 = Label(win, text='Label2', width=20, height=10, bg='#00FF00')
+Label2.grid(row=1, column=0)
+Label3 = Label(win, text='Label3', width=20, height=10, bg='#0000FF')
+Label3.grid(row=2, column=1)
+win.mainloop()
+
+# %%
+from tkinter import *
+win= Tk()
+Label1 = Label(win, text='Label1', width=20, height=10, bg='#FF0000')
+Label1.place(x=5, y=10)
+Label2 = Label(win, text='Label2', width=20, height=10, bg='#00FF00')
+Label2.place(x=40, y=50)
+Label3 = Label(win, text='Label3', width=20, height=10, bg='#0000FF')
+Label3.place(x=100, y=100)
+win.mainloop()   
+
+# %%
+from tkinter import *
+win = Tk()
+win.geometry('400x400+500+500')
+frame = Frame(win)      
+frame.pack()
+frame_left = Frame(frame)
+Label(frame_left, text='Label1', bg='green', width=10, height=5).grid(row=0, column=0)
+Label(frame_left, text='Label2', bg='purple', width=10, height=5).grid(row=2, column=2)
+frame_left.pack(side=LEFT)
+frame_right = Frame(frame)
+Label(frame_right, text='Label3', bg='yellow', width=10, height=5).grid(row=0, column=1)
+Label(frame_right, text='Label4', bg='blue', width=10, height=5).grid(row=1, column=0)
+Label(frame_right, text='Label5', bg='red', width=10, height=5).grid(row=1, column=1)
+frame_right.pack(side=RIGHT)
+win.mainloop()
+
+# %%
+from tkinter import *
+win = Tk()
+win.geometry('400x400+500+500')
+frame_left = LabelFrame(win, text='')
+
 # %%
 import pandas as pd
 import numpy as np
@@ -3510,5 +3618,58 @@ clustering = DBSCAN(eps=3, min_samples=2)
 clustering.fit(X)
 Y_pred = clustering.labels_
 print(Y_pred)
+
+# %%
+from selenium import webdriver
+from time import sleep
+driver = webdriver.Safari()
+sleep(3)
+driver.quit
+
+# %%
+from selenium import webdriver
+# from selenium.webdriver.chrome.service import Service
+from time import sleep
+# service = Service('/Users/henrypeng/Downloads/chromedriver')  
+# default location /usr/local/bin 
+driver = webdriver.Chrome() # service=service)
+sleep(3)
+driver.quit
+
+# %%
+from selenium import webdriver
+driver = webdriver.Firefox()
+sleep(3)
+driver.quit
+
+# %%
+from selenium import webdriver
+driver = webdriver.Edge()
+sleep(3)
+driver.quit
+
+# %%
+from selenium import webdriver
+driver = webdriver.Chrome('chromedriver')
+driver.implicitly_wait(8)
+driver.get('https://www.google.com')
+print(driver.title)
+html = driver.page_source
+print(html)
+driver.quit()
+
+# %%
+from selenium import webdriver
+from bs4 import BeautifulSoup
+driver = webdriver.Chrome('chromedriver')
+driver.implicitly_wait(10)
+driver.get('http://www.google.com')
+print(driver.title)
+soup = BeautifulSoup(driver.page_source,'lxml')
+fp = open('index.html','w',encoding='utf8')
+fp.write(soup.prettify())
+print('Write File to index.html...')
+fp.close()
+driver.quit()
 
 # %%

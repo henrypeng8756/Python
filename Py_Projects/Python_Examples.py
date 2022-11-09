@@ -1751,17 +1751,21 @@ plt.show()
 
 # %%
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
 import numpy as np
-
+plt.rcParams["font.family"] = "PingFang TC"
+plt.rcParams['axes.unicode_minus'] = False
+font_path = '/System/Library/Fonts/PingFang.ttc'
+font_prop = fm.FontProperties(fname=font_path)
 data = {"2010年":[3512,5241,1254],"2011年":[4000,4514,3590],"2012年":[5120,4120,5350]}
 x = [1,2,3]
 y1, y2, y3 = data["2010年"],data['2011年'],data['2012年']
-labels =['Year 2010','Year 2011','Year 2012']
+labels =['2010 年','2011 年','2012 年']
 plt.xticks(x,labels)
 plt.figure(figsize=(6,8), facecolor='#D1BBFF')
-plt.plot(x,y1,"g",label='Product_A')
-plt.plot(x,y2,"r",label='Product_A')
-plt.plot(x,y3,"b",label='Product_A')
+plt.plot(x,y1,"g",label='產品_A')
+plt.plot(x,y2,"r",label='產品_A')
+plt.plot(x,y3,"b",label='產品_A')
 plt.legend(loc=5)
 plt.grid()
 plt.show()
@@ -3671,5 +3675,268 @@ fp.write(soup.prettify())
 print('Write File to index.html...')
 fp.close()
 driver.quit()
+
+# %%
+import math
+circle_radius = [1,2,3,4,5]
+print('\nArea:', end='')
+for radius in circle_radius:
+      area = math.pi*radius**2
+      print('%.2f' %(area), end=' ')
+print('\nPerimeter:', end='')
+for radius in circle_radius:
+      perimeter = 2*math.pi*radius
+      print('%.2f'%(perimeter), end=' ')
+
+# %%
+import math
+class Circle:
+      def __init__(self,radius):
+            self._radius= radius
+      def get_radius(self):
+            return self._radius
+      def set_radius(self, radius):
+            self._radius= radius    
+      def get_area(self):
+            return math.pi*self._radius**2
+      def get_perimeter(self):
+            return 2*math.pi*self._radius
+circle_radius = [1,2,3,4,5]
+for radius in circle_radius:
+      c = Circle(radius)
+      print(f'Radius: {str(c.get_radius())}')
+      print(f'Area: {str(c.get_area())}')
+      print(f'Perimeter: {str(c.get_perimeter())}')
+
+# %%
+class Cars:
+      pass
+class Motorcycle:
+      pass
+mazda = Cars()
+print(isinstance(mazda, Cars))
+print(isinstance(mazda, Motorcycle))      
+
+# %%
+# object_name.attribute_name = value
+mazda = Cars()
+mazda.color = 'blue'
+mazda.seat = 4
+print(mazda.color)
+print(mazda.seat)
+
+# %%
+class Cars:
+      def __init__(self, color, seat):
+            self.color = color
+            self.seat = seat
+      def drive(self):
+            print(f'My car is {self.color} and has {self.seat} seats.')
+mazda = Cars('blue',4)
+mazda.drive()
+
+# %%
+class Cars:
+      pass
+mazda = Cars()
+mazda.color = 'blue'
+mazda.seat = 4
+toyota = Cars()
+toyota.color = 'red'
+toyota.seat = 6
+print('mazda color: ', mazda.color)
+print('mazda seat: ', mazda.seat)
+print('toyota color: ', toyota.color)
+print('toyota seat: ', toyota.seat)
+
+# %%
+class Cars:
+      def __init__(self, color, seat):
+            self.color = color
+            self.seat = seat  
+            self.weight = 140
+mazda = Cars('blue', 4)
+mazda.color = 'yellow'
+mazda.seat = 8
+mazda.weight = 200
+toyota = Cars('red',6)
+print('mazda color: ', mazda.color)
+print('mazda seat: ', mazda.seat)
+print('mazda weight: ', mazda.weight)
+print('toyota color: ', toyota.color)
+print('toyota seat: ', toyota.seat)
+print('toyota weight: ', toyota.weight)   
+
+# %%
+class Cars:
+      door = 4
+      def __init__(self, color, seat):
+            self.color = color
+            self.seat = seat  
+            self.weight = 140
+mazda = Cars('blue', 4)
+toyota = Cars('red', 6)
+print('mazda original door: ', mazda.door)
+print('toyota original door: ', toyota.door)
+Cars.door = 6 
+print('mazda new door: ', mazda.door)
+print('toyota new door: ', toyota.door)   
+
+# %%
+class Cars:
+      def drive(self):  
+            print('Drive is instance method')
+
+# %%
+class Cars:
+      def __init__(self):
+            self.color = 'blue'
+      def drive(self):
+            print(f'{self} is {self.color}.')
+            self.message()
+      def message(self):
+            print('Message method is called.')
+mazda = Cars()
+mazda.drive()
+
+# %%
+class Cars:
+      def __init__(self):
+            self.color = 'blue'
+      def drive(self):
+            print(f'{self} is {self.color}.')
+Cars.drive()
+
+# %%
+class Cars:
+      door = 4
+      def drive(self):
+            self.__class__.door = 5
+print('Cars original door: ', Cars.door)
+mazda = Cars()
+mazda.drive()
+print('Cars new door: ', Cars.door)
+
+# %%
+class Cars:
+      @classmethod
+      def open_door(cls):
+            print('Open door is class method.')
+            
+
+# %%
+class Cars:
+      door = 4
+      @classmethod
+      def open_door(cls):
+            print(f'{cls} has {cls.door} doors.')
+mazda = Cars()
+mazda.open_door()
+Cars.open_door()
+
+# %%
+class Cars:
+      def __init__(self, seat, color):
+            self.seat = seat  
+            self.color = color
+      @classmethod
+      def van(cls):
+            return cls(6, 'black')
+      @classmethod
+      def sports_car(cls):
+            return cls(4, 'yellow')
+van = Cars.van()
+sports_car = Cars.sports_car()
+
+# %%
+class Cars:
+      @staticmethod
+      def accelerate():
+            print('Accelerate is static method.')
+
+# %%
+class Cars:
+      @staticmethod
+      def speed_rate(distance, minute):
+            return distance / minute
+van = Cars()
+van_rate = van.speed_rate(10000,20)
+print('van rate: ', van_rate)
+sports_car_rate = Cars.speed_rate(20000,20)
+print('sports car rate: ', sports_car_rate)
+
+# %%
+class Student:
+      _count = 0
+      def __init__(self, name, ch_score, en_score, math_score):
+            Student._count += 1
+            self._name = name
+            self._ch_score = Student._check_score(ch_score)
+            self._en_score = Student._check_score(en_score)
+            self._math_score = Student._check_score(math_score)
+      @staticmethod
+      def _check_score():
+            if ch_score <= 100 and ch_score >= 0:
+                  pass
+            else:
+                  ch_score = 0
+      @staticmethod
+      def get_count():
+            return Student._count
+s1 = Student('Henry', 80 ,90 ,100)
+s2 = Student('Alice', 60, 70, 80)
+print('Student Counts: ' + str(Student.get_count()))
+
+# %%
+class Blog:
+      def __init__(self):
+            self.__author = 'Mike'
+            self.__titles = []
+      def __add_post(self, title):
+            self.__titles.append(title)
+blog = Blog()
+blog._Blog__add_post('Python tutorials')
+print(blog._Blog__titles)
+
+# %%
+import requests 
+def notify(msg, token):
+      url = 'https://notify-api.line.me/api/notify'
+      headers = {'Authorization': 'Bearer' + token}
+      payload = {'message': msg}
+      requests.post(url, headers=headers, params=payload)
+token = 'fnxWV1ayraFcj5R2Yp6lHbcTizAH9SQV6cQnIOCCXL9'
+message = 'Testing Line Notify API'
+notify(message, token)
+
+# %%
+def notifyText(msg, token):
+      headers = {"Authorization": "Bearer " + token, "Content-Type": "application/x-www-form-urlencoded"}
+      payload = {"message" : msg}
+      r = requests.post('https://notify-api.line.me/api/notify',headers=headers, params=payload)
+      return r.status_code
+token = 'fnxWV1ayraFcj5R2Yp6lHbcTizAH9SQV6cQnIOCCXL9'
+message = 'Testing Line Notify API'
+notify(message, token)
+
+# %%
+import requests
+
+def lineNotifyMessage(token, msg):
+
+    headers = {
+        "Authorization": "Bearer " + token, 
+        "Content-Type" : "application/x-www-form-urlencoded"
+    }
+
+    payload = {'message': msg }
+    r = requests.post("https://notify-api.line.me/api/notify", headers = headers, params = payload)
+    return r.status_code
+
+
+if __name__ == "__main__":
+  token = 'fnxWV1ayraFcj5R2Yp6lHbcTizAH9SQV6cQnIOCCXL9'
+  message = 'Testing Line Notify API'
+  lineNotifyMessage(token, message)
 
 # %%
